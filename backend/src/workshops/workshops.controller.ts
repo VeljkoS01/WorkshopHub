@@ -1,5 +1,6 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, ParseIntPipe } from '@nestjs/common';
 
+import { CreateWorkshopDto } from './dto/create-workshop.dto.js';
 import type { WorkshopEntity } from './workshop.entity.js';
 import { WorkshopsService } from './workshops.service.js';
 
@@ -16,5 +17,10 @@ export class WorkshopsController {
     @Get(':id')
     findOneBy(@Param('id', ParseIntPipe) id: number): Promise<WorkshopEntity> {
         return this.workshopsService.findOneBy(id);
+    }
+
+    @Post()
+    create(@Body() dto: CreateWorkshopDto): Promise<WorkshopEntity> {
+        return this.workshopsService.create(dto);
     }
 }
