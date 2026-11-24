@@ -1,6 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Check, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('workshops')
+@Check('CHK_workshops_capacity', '"capacity" >= 1')
+@Check('CHK_workshops_enrolled', '"enrolled" >= 0 AND "enrolled" <= "capacity"')
 export class WorkshopEntity {
 
     @PrimaryGeneratedColumn()
