@@ -7,6 +7,7 @@ import { AppService } from './app.service.js';
 import { WorkshopsModule } from './workshops/workshops.module.js';
 import { UsersModule } from './users/users.module.js';
 import { CategoriesModule } from './categories/categories.module.js';
+import { SessionsModule } from './sessions/sessions.module.js';
 
 @Module({
     imports: [
@@ -33,7 +34,9 @@ import { CategoriesModule } from './categories/categories.module.js';
 
         UsersModule,
 
-        CategoriesModule
+        CategoriesModule,
+
+        SessionsModule
     ],
     controllers: [AppController],
     providers: [AppService]

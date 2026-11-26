@@ -5,6 +5,7 @@ import { DataSource } from 'typeorm';
 import { WorkshopEntity } from '../workshops/workshop.entity.js';
 import { UserEntity } from '../users/user.entity.js';
 import { CategoryEntity } from '../categories/category.entity.js';
+import { SessionEntity } from '../sessions/session.entity.js';
 
 config({ path: resolve(process.cwd(), '../.env') });
 
@@ -15,7 +16,12 @@ export default new DataSource({
     username: process.env['POSTGRES_USER'],
     password: process.env['POSTGRES_PASSWORD'],
     database: process.env['POSTGRES_DB'],
-    entities: [WorkshopEntity, UserEntity, CategoryEntity],
+    entities: [
+        WorkshopEntity,
+        UserEntity,
+        CategoryEntity,
+        SessionEntity
+    ],
     migrations: ['src/database/migrations/*.ts'],
     synchronize: false
 });

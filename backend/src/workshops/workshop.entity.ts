@@ -4,11 +4,13 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn
 } from 'typeorm';
 
 import type { Relation } from 'typeorm';
 import { CategoryEntity } from '../categories/category.entity.js';
+import { SessionEntity } from '../sessions/session.entity.js';
 
 @Entity('workshops')
 @Check('CHK_workshops_capacity', '"capacity" >= 1')
@@ -42,4 +44,7 @@ export class WorkshopEntity {
 
     @Column({ type: 'text' })
     description!: string;
+
+    @OneToMany(() => SessionEntity, session => session.workshop)
+    sessions!: Relation<SessionEntity[]>;
 }
