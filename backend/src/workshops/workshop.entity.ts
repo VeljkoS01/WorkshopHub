@@ -1,4 +1,14 @@
-import { Check, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Check,
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn
+} from 'typeorm';
+
+import type { Relation } from 'typeorm';
+import { CategoryEntity } from '../categories/category.entity.js';
 
 @Entity('workshops')
 @Check('CHK_workshops_capacity', '"capacity" >= 1')
@@ -11,8 +21,18 @@ export class WorkshopEntity {
     @Column({ type: 'varchar', length: 150 })
     title!: string;
 
-    @Column({ type: 'varchar', length: 30 })
-    category!: string;
+    @Column({ type: 'int' })
+    categoryId!: number;
+
+    @ManyToOne(() => CategoryEntity, category => category.workshops, {
+        nullable: false,
+        onDelete: 'RESTRICT'
+    })
+    @JoinColumn({
+        name: 'categoryId',
+        foreignKeyConstraintName: 'FK_workshops_category'
+    })
+    category!: Relation<CategoryEntity>;
 
     @Column({ type: 'int' })
     capacity!: number;

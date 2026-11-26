@@ -13,10 +13,9 @@ export class CreateWorkshopDto {
     @MaxLength(150)
     title!: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(30)
-    category!: string;
+    @IsInt()
+    @Min(1)
+    categoryId!: number;
 
     @IsInt()
     @Min(1)
